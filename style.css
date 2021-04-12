@@ -1,0 +1,33 @@
+#display-time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    background-size: cover;
+}
+
+.hide-setting {
+    display: none;
+}
+
+#setting-button {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    border: solid white;
+}
+
+#more-button {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    border: solid white;
+}
