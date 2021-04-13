@@ -1,33 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Roboto&display=swap');
+
+img {
+    opacity: 100%;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
 #display-time {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: black;
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-size: 30px;
+    background-color: white;
+}
+
+#form-setting h1 {
+    padding-top: 30px;
+    font-size: 30px;
+    font-family: 'Orelega One', cursive;
+}
+
+h2, #more-options h1 {
+    font-family: 'Orelega One', cursive;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+#clock {
+    font-size: 100px;
+}
+
+#setting {
+    width: 100%;
+    background-color: white;
+    position: absolute;
     text-align: center;
 }
 
-img {
-    width: 100%;
-    height: fit-content;
-    position: fixed;
-    background-size: cover;
+#show-seconds, #show-date {
+    font-family: 'Roboto', sans-serif;
 }
 
-.hide-setting {
+#save-setting, #close {
+    font-family: 'Orelega One', cursive;
+    font-size: 18px;
+    border: solid black;
+    background-color: white;
+    border-radius: 6px;
+    margin: 20px;
+}
+
+#date {
+    padding-bottom: 30px;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.hide {
     display: none;
 }
 
 #setting-button {
+    font-family: 'Orelega One', cursive;
+    font-size: 18px;
+    border: solid black;
+    background-color: white;
+    border-radius: 6px;
+    margin: 20px;
     position: absolute;
     top: 2%;
     left: 2%;
-    border: solid white;
 }
 
 #more-button {
     position: absolute;
     bottom: 2%;
     left: 2%;
-    border: solid white;
+    font-family: 'Orelega One', cursive;
+    font-size: 18px;
+    border: solid black;
+    background-color: white;
+    border-radius: 6px;
+    margin: 20px;
+}
+
+#more-options {
+    padding-top: 30px;
+    margin: auto;
+    bottom: 0%;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+
+#more-section, #setting-section {
+    display: grid;
+    grid-template-columns: auto auto;
 }
