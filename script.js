@@ -24,41 +24,12 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=EyHo5aUBuqgCzxSgckXpv6DkbApqF
 //GREETING
 const input = []
 input.push(`
-    <h1>HELLO! IT'S CURRENTLY</h1>
+    <h1>GOOD ! IT'S CURRENTLY</h1>
     <div id="clock" class="clock"></div>
     <div id="date" class="date"></div>
 `)
 
 $displayTime.innerHTML=input.join('')
-
-
-//CLOCK 
-setInterval(showTime, 1000);
-function showTime() {
-    let time = new Date()
-    let hour = time.getHours()
-    let min = String(time.getMinutes()).padStart(2,"0")
-    let sec = String(time.getSeconds()).padStart(2,"0")
-    let currentTime = ''
-    let currentDate = ''
-
-    console.log(document.getElementById('seconds').checked)
-    if(document.getElementById('seconds').checked){
-        currentTime = hour + ":" + min + ":" + sec
-    }
-    else {
-        console.log("showTime")
-        currentTime = hour + ":" + min
-    }
-  
-    document.getElementById("clock").innerHTML = currentTime
-    console.log(new Date())
-    if(document.getElementById('yes-date').checked){
-        currentDate = new Date().toDateString()
-    }
-
-    document.getElementById("date").innerHTML = currentDate    
-}
 
 
 
@@ -91,13 +62,47 @@ input_setting_btn.push(`
                 <label for="no">No</label><br>
             </div>
         </div>
-        <button id="save-setting">CLOSE</button>
+        <button type="submit" id="save-setting">SAVE</button>
     </form>
 `)
 $createForm.innerHTML=input_setting_btn.join('')
+
+if(localStorage.getItem('saved-settings')){
+    const $savedSettings = JSON.parse(localStorage.getItem('saved-settings'))
+    document.getElementById('seconds').checked=$savedSettings.seconds
+    document.getElementById('yes-date').checked=$savedSettings.date
+}
+
+//CLOCK 
+setInterval(showTime, 1000);
+function showTime() {
+    let time = new Date()
+    let hour = time.getHours()
+    let min = String(time.getMinutes()).padStart(2,"0")
+    let sec = String(time.getSeconds()).padStart(2,"0")
+    let currentTime = ''
+    let currentDate = ''
+
+    if(document.getElementById('seconds').checked){
+        currentTime = hour + ":" + min + ":" + sec
+    }
+    else {
+        currentTime = hour + ":" + min
+    }
+  
+    document.getElementById("clock").innerHTML = currentTime
+    if(document.getElementById('yes-date').checked){
+        currentDate = new Date().toDateString()
+    }
+
+    document.getElementById("date").innerHTML = currentDate    
+}
+
+
+
 $createForm.classList.add('hide')
 
-showTime()
+// showTime()
 
 const $settingButton = document.getElementById('setting-button')
 $settingButton.addEventListener('click', function(e){
@@ -106,11 +111,18 @@ $settingButton.addEventListener('click', function(e){
     $createForm.classList.remove('hide')
 
     const $settingForm = document.getElementById('form-setting')
+    console.log($settingForm)
     const $saveSettingButton = document.getElementById('save-setting')
     // const $hideSetting = document.getElementById('hide-setting')
     $saveSettingButton.addEventListener('click', function(a){
         a.preventDefault()
-        showTime()
+        // showTime()
+        const $storeSettings ={
+            seconds : document.getElementById('seconds').checked,
+            date:document.getElementById('yes-date').checked
+        }
+        const string =JSON.stringify($storeSettings)
+        localStorage.setItem('saved-settings', string)    
         $createForm.classList.add('hide')
         $settingButton.classList.remove('hide')
     })

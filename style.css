@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Roboto&display=swap');
 
 img {
-    opacity: 100%;
     background-repeat:no-repeat;
     background-size:cover;
 }
@@ -98,6 +97,11 @@ h2, #more-options h1 {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
+}
+
+#day-of-week, #day-of-month, #day-of-year, #week-of-year {
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 #more-section, #setting-section {
