@@ -3,6 +3,7 @@ const $setting = document.getElementById('setting')
 const $more = document.getElementById('more')
 
 
+
 //RETRIEVE AND DISPLAY CURRENT NASA APOD
 fetch('https://api.nasa.gov/planetary/apod?api_key=EyHo5aUBuqgCzxSgckXpv6DkbApqFEzwtQzMmfvY')
 
@@ -11,7 +12,7 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=EyHo5aUBuqgCzxSgckXpv6DkbApqF
 })
 .then(function(imageData){
     if(imageData.media_type==='video'){
-        document.querySelector('p').textContent='its a video, display another image'
+        document.querySelector('img').setAttribute("href","https://unsplash.com/photos/oMpAz-DN-9I")
         //https://unsplash.com/photos/oMpAz-DN-9I
     } else {
         document.querySelector('img').setAttribute('src',imageData.url)
@@ -20,11 +21,55 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=EyHo5aUBuqgCzxSgckXpv6DkbApqF
 })
 
 
+
+//CLOCK SETTINGS
+setInterval(showTime, 1000)
+function showTime() {
+    let time = new Date()
+    let hour = time.getHours()
+    let min = String(time.getMinutes()).padStart(2,"0")
+    let sec = String(time.getSeconds()).padStart(2,"0")
+    let currentTime = ''
+    let currentDate = ''
+
+    if(document.getElementById('seconds').checked){
+        currentTime = hour + ":" + min + ":" + sec
+    }
+    else {
+        currentTime = hour + ":" + min
+    }
+  
+    document.getElementById("clock").innerHTML = currentTime
+    if(document.getElementById('yes-date').checked){
+        currentDate = new Date().toDateString()
+    }
+
+    document.getElementById("date").innerHTML = currentDate   
+}
+
+
+
+//CUSTOM GREETINGS 
+let time = new Date()
+let hour = time.getHours()
+let greeting = []
+const greetings = ['MORNING','AFTERNOON','EVENING']
+
+if(hour<12){
+    greeting=greetings[0]
+} else if (12<=hour<17){
+    greeting=greetings[1]
+} else {
+    greeting=greetings[2]
+}
+
+
+
 //CLOCK DISPLAY SETTINGS
 //GREETING
 const input = []
 input.push(`
-    <h1>GOOD ! IT'S CURRENTLY</h1>
+    <h1>GOOD ${greeting}! IT'S CURRENTLY</h1>
     <div id="clock" class="clock"></div>
     <div id="date" class="date"></div>
 `)
@@ -33,7 +78,7 @@ $displayTime.innerHTML=input.join('')
 
 
 
-//SETTING BUTTON
+//SETTING SECTION
 const input_a = []
 input_a.push(`
     <button id="setting-button">SETTING</button>
@@ -67,42 +112,7 @@ input_setting_btn.push(`
 `)
 $createForm.innerHTML=input_setting_btn.join('')
 
-if(localStorage.getItem('saved-settings')){
-    const $savedSettings = JSON.parse(localStorage.getItem('saved-settings'))
-    document.getElementById('seconds').checked=$savedSettings.seconds
-    document.getElementById('yes-date').checked=$savedSettings.date
-}
-
-//CLOCK 
-setInterval(showTime, 1000);
-function showTime() {
-    let time = new Date()
-    let hour = time.getHours()
-    let min = String(time.getMinutes()).padStart(2,"0")
-    let sec = String(time.getSeconds()).padStart(2,"0")
-    let currentTime = ''
-    let currentDate = ''
-
-    if(document.getElementById('seconds').checked){
-        currentTime = hour + ":" + min + ":" + sec
-    }
-    else {
-        currentTime = hour + ":" + min
-    }
-  
-    document.getElementById("clock").innerHTML = currentTime
-    if(document.getElementById('yes-date').checked){
-        currentDate = new Date().toDateString()
-    }
-
-    document.getElementById("date").innerHTML = currentDate    
-}
-
-
-
 $createForm.classList.add('hide')
-
-// showTime()
 
 const $settingButton = document.getElementById('setting-button')
 $settingButton.addEventListener('click', function(e){
@@ -113,10 +123,8 @@ $settingButton.addEventListener('click', function(e){
     const $settingForm = document.getElementById('form-setting')
     console.log($settingForm)
     const $saveSettingButton = document.getElementById('save-setting')
-    // const $hideSetting = document.getElementById('hide-setting')
     $saveSettingButton.addEventListener('click', function(a){
         a.preventDefault()
-        // showTime()
         const $storeSettings ={
             seconds : document.getElementById('seconds').checked,
             date:document.getElementById('yes-date').checked
@@ -130,7 +138,16 @@ $settingButton.addEventListener('click', function(e){
 
 
 
-//MORE BUTTON
+//LOCALSTORAGE STORING
+if(localStorage.getItem('saved-settings')){
+    const $savedSettings = JSON.parse(localStorage.getItem('saved-settings'))
+    document.getElementById('seconds').checked=$savedSettings.seconds
+    document.getElementById('yes-date').checked=$savedSettings.date
+}
+
+
+
+//MORE SECTION
 const input_b = []
 input_b.push(`
     <button id="more-button">MORE</button>
@@ -166,7 +183,6 @@ $moreButton.addEventListener('click', function(b){
     `)
 
     $moreOptions.innerHTML=input_more_btn.join('')
-    
     
     $moreButton.classList.add('hide')
     $moreOptions.classList.remove('hide')
@@ -221,6 +237,8 @@ $moreButton.addEventListener('click', function(b){
     }
     showWeek()
 
+
+    
     //CLOSE BUTTON
     const $close = document.getElementById('close')
     $close.addEventListener('click',function(c){

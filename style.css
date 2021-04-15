@@ -1,8 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&family=Roboto&display=swap');
 
-img {
-    background-repeat:no-repeat;
-    background-size:cover;
+#display-nasa {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
+    z-index: -1;
+}
+
+#display-nasa img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
 }
 
 #display-time {
@@ -15,6 +30,11 @@ img {
     font-family: 'Orelega One', cursive;
     font-size: 30px;
     background-color: white;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: solid 5px black;
+    border-radius: 16px;
 }
 
 #form-setting h1 {
@@ -108,3 +128,4 @@ h2, #more-options h1 {
     display: grid;
     grid-template-columns: auto auto;
 }
+
