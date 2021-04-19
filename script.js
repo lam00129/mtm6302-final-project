@@ -12,11 +12,9 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=EyHo5aUBuqgCzxSgckXpv6DkbApqF
 })
 .then(function(imageData){
     if(imageData.media_type==='video'){
-        document.querySelector('img').setAttribute("href","https://unsplash.com/photos/oMpAz-DN-9I")
-        //https://unsplash.com/photos/oMpAz-DN-9I
+        document.querySelector('img').setAttribute("src","https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80")
     } else {
         document.querySelector('img').setAttribute('src',imageData.url)
-        // document.querySelector('p').textContent=imageData.explanation
     }
 })
 
@@ -55,9 +53,9 @@ let hour = time.getHours()
 let greeting = []
 const greetings = ['MORNING','AFTERNOON','EVENING']
 
-if(hour<12){
+if(hour<=12){
     greeting=greetings[0]
-} else if (12<=hour<17){
+} else if (hour<=16){
     greeting=greetings[1]
 } else {
     greeting=greetings[2]
@@ -121,7 +119,6 @@ $settingButton.addEventListener('click', function(e){
     $createForm.classList.remove('hide')
 
     const $settingForm = document.getElementById('form-setting')
-    console.log($settingForm)
     const $saveSettingButton = document.getElementById('save-setting')
     $saveSettingButton.addEventListener('click', function(a){
         a.preventDefault()
