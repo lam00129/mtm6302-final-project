@@ -51,13 +51,16 @@ function showTime() {
 let time = new Date()
 let hour = time.getHours()
 let greeting = []
-const greetings = ['MORNING','AFTERNOON','EVENING']
+const greetings = ['MORNING','AFTERNOON','EVENING','NIGHT']
 
-if(hour<=12){
+if(hour<=4){
+    greeting=greetings[3]
+} else if (hour<=12){
     greeting=greetings[0]
 } else if (hour<=16){
     greeting=greetings[1]
-} else {
+}
+else {
     greeting=greetings[2]
 }
 
